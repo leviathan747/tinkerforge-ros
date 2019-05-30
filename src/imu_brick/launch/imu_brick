@@ -1,0 +1,9 @@
+<launch>
+
+  <node pkg="imu_brick" type="imu_brick_node" name="imu_brick_node" output="screen">
+    <param name="host" value="$(optenv BRICKD_HOST localhost)"/>
+    <param name="uid" value="$(optenv IMU_UID)"/>
+    <param name="frame_id" value="imu"/>
+  </node>
+
+</launch>
