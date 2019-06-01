@@ -105,7 +105,7 @@ int main(int argc, char** argv) {
 
 	ros::NodeHandle pnh("~");
 	pnh.param("frame_id", frameId_, frameId_);
-	int period = 100;
+	int period = 50;
 	std::string uid = "";
   std::string host = HOST;
 	pnh.param("period_ms", period, period);
@@ -119,7 +119,7 @@ int main(int argc, char** argv) {
 	pnh.param("cov_acceleration", cov_acceleration, cov_acceleration);
 
 	ros::NodeHandle nh;
-	imuPub_ = nh.advertise<sensor_msgs::Imu>("imu", 1);
+	imuPub_ = nh.advertise<sensor_msgs::Imu>("imu", 16);
 	
 	// Create IP connection
 	IPConnection ipcon;
@@ -135,6 +135,9 @@ int main(int argc, char** argv) {
 		return 1;
 	}
 	// Don't use device before ipcon is connected
+  
+  // set sensor mode
+  imu_v2_set_sensor_fusion_mode(&imu, IMU_V2_SENSOR_FUSION_ON_WITHOUT_MAGNETOMETER);
 
 	// Register all data callback to function cb_all_data
 	imu_v2_register_callback(&imu,
@@ -142,7 +145,7 @@ int main(int argc, char** argv) {
 	                         (void *)cb_all_data,
 	                         NULL);
 
-	// Set period for all data callback to 0.1s (100ms)
+	// Set period for all data callback to 0.05s (50ms)
 	// Note: The all data callback is only called every 0.1 seconds
 	//       if the all data has changed since the last call!
 	imu_v2_set_all_data_period(&imu, period);
