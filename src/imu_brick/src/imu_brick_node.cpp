@@ -105,7 +105,7 @@ int main(int argc, char** argv) {
 
 	ros::NodeHandle pnh("~");
 	pnh.param("frame_id", frameId_, frameId_);
-	int period = 50;
+	int period = 10;
 	std::string uid = "";
   std::string host = HOST;
 	pnh.param("period_ms", period, period);
