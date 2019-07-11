@@ -137,7 +137,7 @@ int main(int argc, char** argv) {
 	// Don't use device before ipcon is connected
   
   // set sensor mode
-  imu_v2_set_sensor_fusion_mode(&imu, IMU_V2_SENSOR_FUSION_ON_WITHOUT_MAGNETOMETER);
+  imu_v2_set_sensor_fusion_mode(&imu, IMU_V2_SENSOR_FUSION_ON);
 
 	// Register all data callback to function cb_all_data
 	imu_v2_register_callback(&imu,
