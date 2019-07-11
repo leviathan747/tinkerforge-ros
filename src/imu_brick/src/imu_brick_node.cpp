@@ -119,7 +119,7 @@ int main(int argc, char** argv) {
 	pnh.param("cov_acceleration", cov_acceleration, cov_acceleration);
 
 	ros::NodeHandle nh;
-	imuPub_ = nh.advertise<sensor_msgs::Imu>("imu", 16);
+	imuPub_ = nh.advertise<sensor_msgs::Imu>("tinkerforge/imu", 16);
 	
 	// Create IP connection
 	IPConnection ipcon;
